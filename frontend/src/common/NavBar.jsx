@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -6,20 +7,21 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-import { logOut, Login } from "../actions/auth";
+import { logOut } from "../actions/auth";
 
 function Navbar() {
   // const userData = localStorage.getItem("userJWT");
   // const isLoggedIn = userData && userData.access !== "";
 
   const [auth, setAuth] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = (event) => {
     logOut({});
   };
 
   const handleLogin = (event) => {
-    Login({});
+    navigate("/login");
   };
 
   return (

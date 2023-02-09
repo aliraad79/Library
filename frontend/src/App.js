@@ -2,26 +2,26 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import HomePage from "./pages/HomePage";
+import Login from "./pages/Login";
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
     primary: {
-      main: '#1976d2',
+      main: "#1976d2",
     },
   },
 });
 
 function App() {
-
   return (
     <ThemeProvider theme={darkTheme}>
       <BrowserRouter>
         <Routes>
+          <Route exact path="/login" element={<Login />} />
           <Route exact path="/" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
-
     </ThemeProvider>
   );
 }
