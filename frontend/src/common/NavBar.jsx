@@ -6,16 +6,20 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-import { logOut } from "../actions/auth";
+import { logOut, Login } from "../actions/auth";
 
 function Navbar() {
   // const userData = localStorage.getItem("userJWT");
   // const isLoggedIn = userData && userData.access !== "";
 
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = React.useState(false);
 
-  const handleMenu = (event) => {
+  const handleLogout = (event) => {
     logOut({});
+  };
+
+  const handleLogin = (event) => {
+    Login({});
   };
 
   return (
@@ -33,13 +37,25 @@ function Navbar() {
             <div>
               <IconButton
                 size="small"
-                aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={handleMenu}
+                onClick={handleLogout}
                 color="inherit"
               >
-                Log Out
+                Logout
+              </IconButton>
+            </div>
+          )}
+          {!auth && (
+            <div>
+              <IconButton
+                size="small"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleLogin}
+                color="inherit"
+              >
+                Login
               </IconButton>
             </div>
           )}
