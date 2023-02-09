@@ -6,7 +6,8 @@ export const Login = (data) => {
 };
 
 export const signUp = (data) => {
-  return axios().post(`/auth/users/`, data);
+  console.log("Sign Up ", data);
+  // return axios().post(`/auth/users/`, data);
 };
 
 export const logOut = (data) => {

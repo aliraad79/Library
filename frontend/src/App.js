@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const darkTheme = createTheme({
   palette: {
@@ -19,6 +20,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
