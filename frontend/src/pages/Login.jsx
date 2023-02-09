@@ -5,7 +5,7 @@ import SignInSide from "../components/SignInSide";
 function Login() {
   return (
     <Fragment>
-      {/* <Navbar /> */}
+      <Navbar />
       <SignInSide />
     </Fragment>
   );

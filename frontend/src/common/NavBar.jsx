@@ -25,7 +25,7 @@ function Navbar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, height:"7vh" }}>
       <AppBar position="static">
         <Toolbar>
           <Typography
