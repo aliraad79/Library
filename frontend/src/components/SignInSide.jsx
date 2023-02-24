@@ -8,17 +8,35 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Login } from "../actions/auth";
 
 export default function SignInSide() {
+  const navigate = useNavigate();
+
+  const [loginError, setLoginError] = useState(false);
+  const [loginErrorText, setLoginErrorText] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     Login({
-      email: data.get("email"),
+      username: data.get("username"),
       password: data.get("password"),
-    });
+    })
+      .then((response) => {
+        localStorage.setItem("Token", response.data.auth_token);
+        navigate("/dashboard");
+      })
+      .catch((e) => {
+        if (e.response.data.non_field_errors) {
+          setLoginErrorText("Login Failed");
+          setLoginError(true);
+        }
+      });
   };
 
   return (
@@ -29,16 +47,16 @@ export default function SignInSide() {
         xs={false}
         sm={4}
         md={7}
-        // sx={{
-        //   backgroundImage: "url(https://source.unsplash.com/random)",
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundColor: (t) =>
-        //     t.palette.mode === "light"
-        //       ? t.palette.grey[50]
-        //       : t.palette.grey[900],
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "center",
-        // }}
+        sx={{
+          backgroundImage: "url(/Library_login.jpg)",
+          backgroundRepeat: "no-repeat",
+          backgroundColor: (t) =>
+            t.palette.mode === "light"
+              ? t.palette.grey[50]
+              : t.palette.grey[900],
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
@@ -66,11 +84,13 @@ export default function SignInSide() {
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="username"
               label="Username"
-              name="email"
-              autoComplete="email"
+              name="username"
+              autoComplete="username"
               autoFocus
+              error={loginError}
+              helperText={loginErrorText}
             />
             <TextField
               margin="normal"

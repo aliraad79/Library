@@ -1,4 +1,4 @@
-import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -8,18 +8,49 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { signUp } from "../actions/auth";
 
 export default function SignUpSide() {
+  const navigate = useNavigate();
+
+  const [emailError, setEmailError] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  const [emailErrorText, setEmailErrorText] = useState("");
+  const [usernameErrorText, setUsernameErrorText] = useState("");
+  const [passwordErrorText, setPasswordErrorText] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     signUp({
-      name: data.get("name"),
+      email: data.get("email"),
       username: data.get("username"),
       password: data.get("password"),
-    });
+    })
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((e) => {
+        if (e.response.data.email) {
+          setEmailErrorText(e.response.data.email[0]);
+          setEmailError(true);
+        }
+        if (e.response.data.username) {
+          setUsernameErrorText(e.response.data.username[0]);
+          setUsernameError(true);
+        }
+        if (e.response.data.password) {
+          setPasswordErrorText(e.response.data.password[0]);
+          setPasswordError(true);
+        }
+      });
   };
 
   return (
@@ -30,16 +61,16 @@ export default function SignUpSide() {
         xs={false}
         sm={4}
         md={7}
-        // sx={{
-        //   backgroundImage: "url(https://source.unsplash.com/random)",
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundColor: (t) =>
-        //     t.palette.mode === "light"
-        //       ? t.palette.grey[50]
-        //       : t.palette.grey[900],
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "center",
-        // }}
+        sx={{
+          backgroundImage: "url(/Library_image.jpg)",
+          backgroundRepeat: "no-repeat",
+          backgroundColor: (t) =>
+            t.palette.mode === "light"
+              ? t.palette.grey[50]
+              : t.palette.grey[900],
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
@@ -67,11 +98,13 @@ export default function SignUpSide() {
               margin="normal"
               required
               fullWidth
-              id="name"
-              label="Name"
-              name="name"
-              autoComplete="name"
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
               autoFocus
+              error={emailError}
+              helperText={emailErrorText}
             />
             <TextField
               margin="normal"
@@ -82,6 +115,8 @@ export default function SignUpSide() {
               name="username"
               autoComplete="username"
               autoFocus
+              error={usernameError}
+              helperText={usernameErrorText}
             />
             <TextField
               margin="normal"
@@ -92,6 +127,8 @@ export default function SignUpSide() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={passwordError}
+              helperText={passwordErrorText}
             />
             <Button
               type="submit"

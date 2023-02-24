@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
-  const userData = localStorage.getItem("userJWT");
+  const userData = localStorage.getItem("Token");
   return userData && userData.access !== "" ? (
     <Outlet />
   ) : (

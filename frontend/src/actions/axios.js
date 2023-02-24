@@ -1,19 +1,17 @@
 import axios from "axios";
 
 function getHeaders() {
-  let userData = localStorage.getItem("userJWT");
-  if (userData) userData = JSON.parse(userData);
+  let token = localStorage.getItem("Token");
   return {
-    Authorization:
-      userData && userData.access ? `JWT ${userData.access}` : "",
+    Authorization: token ? `Token ${token}` : "",
   };
 }
-
 
 function createAxiosInstance() {
   const instance = axios.create({
     // baseURL: window.REACT_APP_API_URL || process.env.REACT_APP_API_URL,
-    baseURL: "localhost:3000",
+    baseURL: "http://localhost:8000/api",
+    // baseURL: "/api",
     headers: getHeaders(),
   });
 
@@ -28,9 +26,9 @@ function createAxiosInstance() {
   instance.interceptors.response.use(
     (response) => response,
     (err) => {
-      if (err.response.status === 403 || err.response.status === 401) {
+      if (err || err.response.status === 403 || err.response.status === 401) {
         localStorage.clear();
-        window.location.reload();
+        // window.location.reload();
       }
       throw err;
     }

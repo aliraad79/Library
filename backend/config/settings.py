@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-+_==8^g76*g2(uxcvm!9#^53p-8z-^xj$(a*8hi8g4d5o#gvk#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['DEBUG'] == "True" if os.environ['DEBUG'] else True
+DEBUG = os.environ["DEBUG"] == "True" if "DEBUG" in os.environ else True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -38,13 +38,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     "rest_framework",
+    "rest_framework.authtoken",
+    "djoser",
     "user",
+    "library",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -124,3 +129,32 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+AUTH_USER_MODEL = "user.User"
+
+# REST
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+   ),
+}
+
+
+DJOSER = {
+    # 'LOGIN_FIELD': 'email',
+    "HIDE_USERS": True,
+    "SERIALIZERS": {},
+    "PERMISSIONS": {
+        # 'user_list': ['rest_framework.permissions.IsAdminUser'],
+    },
+}
+
+
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://frontend:81",
+    "http://frontend"
+]

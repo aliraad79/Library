@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -10,22 +9,34 @@ import Typography from "@mui/material/Typography";
 import { logOut } from "../actions/auth";
 
 function Navbar() {
-  // const userData = localStorage.getItem("userJWT");
-  // const isLoggedIn = userData && userData.access !== "";
+  const userData = localStorage.getItem("Token");
+  const isLoggedIn = userData && userData !== "";
 
-  const [auth, setAuth] = React.useState(false);
   const navigate = useNavigate();
 
   const handleLogout = (event) => {
-    logOut({});
+    console.log("HERE2");
+    logOut()
+      .then((response) => {
+        localStorage.clear();
+        navigate("/dashboard");
+      })
+      .catch((e) => {
+        navigate("/login");
+        console.log("Error", e);
+      });
   };
 
   const handleLogin = (event) => {
     navigate("/login");
   };
 
+  const handleNewLibrary = (event) => {
+    navigate("/new-library");
+  };
+
   return (
-    <Box sx={{ flexGrow: 1, height:"7vh" }}>
+    <Box sx={{ flexGrow: 1, height: "7vh" }}>
       <AppBar position="static">
         <Toolbar>
           <Typography
@@ -35,8 +46,17 @@ function Navbar() {
           >
             Library
           </Typography>
-          {auth && (
+          {isLoggedIn && (
             <div>
+              <IconButton
+                size="small"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleNewLibrary}
+                color="inherit"
+              >
+                New Library
+              </IconButton>
               <IconButton
                 size="small"
                 aria-controls="menu-appbar"
@@ -48,7 +68,7 @@ function Navbar() {
               </IconButton>
             </div>
           )}
-          {!auth && (
+          {!isLoggedIn && (
             <div>
               <IconButton
                 size="small"
