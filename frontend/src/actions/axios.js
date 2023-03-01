@@ -18,7 +18,7 @@ function createAxiosInstance() {
   instance.defaults.timeout = 5000;
 
   instance.interceptors.request.use((request) => {
-    if (request.method === "POST")
+    if (request.method === "POST" && !request.headers.includes("content-type"))
       request.headers["content-type"] = "application/json";
     return request;
   });
