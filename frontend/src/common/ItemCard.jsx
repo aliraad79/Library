@@ -4,10 +4,10 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 
-function ItemCard({ title, desc }) {
+function ItemCard({ title, desc, id }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
+      <CardActionArea href={`/item/${id}`}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {title}

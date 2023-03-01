@@ -12,7 +12,6 @@ function Dashboard() {
     getLibraries()
       .then((response) => {
         setItems(response.data);
-        // console.log(response.data);
       })
       .catch((e) => {
         console.log("Error", e);
@@ -25,8 +24,6 @@ function Dashboard() {
       <div
         className="justify-center"
         style={{
-          height: "10vh",
-          width: "100%",
           backgroundColor: "#86A3B8",
           color: "#fff",
           display: "flex",
@@ -39,7 +36,7 @@ function Dashboard() {
       <Grid container spacing={0.5} style={{ margin: "5px", maxWidth: "99%" }}>
         {items.map((i) => (
           <Grid item xs={3}>
-            <ItemCard title={i.title} desc={i.description}></ItemCard>
+            <ItemCard title={i.title} desc={i.description} id={i.id}></ItemCard>
           </Grid>
         ))}
       </Grid>
