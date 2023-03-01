@@ -1,0 +1,8 @@
+jpg
+txt
+png
+word
+py
+java
+pyc
+sqlite3
