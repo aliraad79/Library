@@ -15,7 +15,6 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = (event) => {
-    console.log("HERE2");
     logOut()
       .then((response) => {
         localStorage.clear();
@@ -23,7 +22,6 @@ function Navbar() {
       })
       .catch((e) => {
         navigate("/login");
-        console.log("Error", e);
       });
   };
 
@@ -36,7 +34,7 @@ function Navbar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, height: "7vh" }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <Typography
