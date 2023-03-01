@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import NewLibrary from "./pages/NewLibrary";
+import LibraryPage from "./pages/LibraryPage";
 
 const darkTheme = createTheme({
   palette: {
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/new-library" element={<NewLibrary />} />
+          <Route exact path="/item/:id" element={<LibraryPage />} />
           <Route exact path="/" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
