@@ -4,16 +4,18 @@ import { Button, Paper, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { addLibrary } from "../actions/library";
 import Navbar from "../common/NavBar";
+import SelectRestrictedType from "../common/SelectRestrictedType";
 
 function NewLibrary() {
   const [title, setTitle] = useState("");
   const [description, setDesc] = useState("");
+  const [selectedTypes, setSelectedTypes] = useState([]);
   const navigate = useNavigate();
 
   const onTextChange = (e) => setTitle(e.target.value);
   const onDescChange = (e) => setDesc(e.target.value);
   const handleSubmit = () => {
-    addLibrary({ title, description })
+    addLibrary({ title, description, accepted_file_extention: selectedTypes })
       .then((response) => {
         navigate("/dashboard");
       })
@@ -50,7 +52,10 @@ function NewLibrary() {
           label="Description"
           autoFocus
         />
-
+        <SelectRestrictedType
+          selectedTypes={selectedTypes}
+          setSelectedTypes={setSelectedTypes}
+        />
         <Button onClick={handleSubmit}>Submit</Button>
       </Paper>
     </Fragment>
