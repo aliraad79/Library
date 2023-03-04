@@ -20,10 +20,15 @@ class Media(models.Model):
 
 class Attachment(models.Model):
     name = models.CharField(max_length=512, default="")
-    value = models.CharField(max_length=512, default="")
+    textValue = models.TextField(null=True)
+    fileValue = models.FileField(null=True)
+
     media = models.ForeignKey(
         Media, on_delete=models.CASCADE, related_name="attachments"
     )
+
+    def value(self):
+        return self.textValue if self.textValue != None else self.fileValue
 
 
 class MediaType(models.Model):
