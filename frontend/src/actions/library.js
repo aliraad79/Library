@@ -8,7 +8,7 @@ export const getLibraries = () => {
   return axios().get(`/library`);
 };
 
-export const getItemInfo = ({ id }) => {
+export const getLibraryInfo = ({ id }) => {
   return axios().get(`/library/${id}`);
 };
 
