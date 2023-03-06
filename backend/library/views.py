@@ -33,12 +33,12 @@ class LibraryInstanceView(generics.RetrieveAPIView):
         return Library.objects.filter(owner=user)
 
 
-class AttachmentView(generics.CreateAPIView):
+class AttachmentView(generics.CreateAPIView, generics.RetrieveAPIView):
     queryset = Attachment.objects.all()
     serializer_class = AttachmentSerializer
 
 
-class MediaView(generics.CreateAPIView):
+class MediaView(generics.CreateAPIView, generics.RetrieveAPIView):
     queryset = Media.objects.all()
     serializer_class = MediaSerializer
 
