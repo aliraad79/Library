@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { Button, Link, Paper } from "@mui/material";
 
-import { useParams } from "react-router-dom";
 import { addAttachment } from "../actions/attachment";
 import { getMediaInfo } from "../actions/media";
+
 import AddFileAttachmentPopUp from "../common/AddFileAttachmentPopUp";
 import AddFieldAttachmentPopUp from "../common/AddFieldAttachmentPopUp";
 
