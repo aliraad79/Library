@@ -25,7 +25,6 @@ function LibraryPage() {
         setDesc(response.data.description);
         setAcceptedTypes(response.data.accepted_file_extention);
         setMedias(response.data.medias);
-        console.log(response.data);
       })
       .catch((e) => {
         console.log("Error", e);
