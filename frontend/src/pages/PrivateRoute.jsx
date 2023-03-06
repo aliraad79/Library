@@ -2,10 +2,10 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
   const userData = localStorage.getItem("Token");
-  return userData && userData.access !== "" ? (
+  return userData && userData !== "" ? (
     <Outlet />
   ) : (
-    <Navigate to="/sign-in" />
+    <Navigate to="/login" />
   );
 };
 

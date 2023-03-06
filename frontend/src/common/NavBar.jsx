@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
+import Link from "@mui/material/Link";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
@@ -42,7 +43,9 @@ function Navbar() {
             component="div"
             sx={{ flexGrow: 1, marginLeft: "50px" }}
           >
-            Library
+            <Link href="/dashboard" underline="none" color="#fff">
+              Library
+            </Link>
           </Typography>
           {isLoggedIn && (
             <div>

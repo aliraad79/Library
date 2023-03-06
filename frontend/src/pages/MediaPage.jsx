@@ -6,12 +6,13 @@ import { Button, Link, Paper } from "@mui/material";
 import { addAttachment } from "../actions/attachment";
 import { getMediaInfo } from "../actions/media";
 
-import AddFileAttachmentPopUp from "../common/AddFileAttachmentPopUp";
 import AddFieldAttachmentPopUp from "../common/AddFieldAttachmentPopUp";
+import AddFileAttachmentPopUp from "../common/AddFileAttachmentPopUp";
 
 import Navbar from "../common/NavBar";
 
 function MediaPage() {
+  const [title, setTitle] = useState("");
   const [dataUrl, setDataUrl] = useState("");
   const [libraryId, setLibraryId] = useState([]);
 
@@ -25,6 +26,7 @@ function MediaPage() {
   useEffect(() => {
     getMediaInfo({ id })
       .then((response) => {
+        setTitle(response.data.title);
         setDataUrl(response.data.data);
         setLibraryId(response.data.library);
         setAttachments(response.data.attachments);
@@ -67,12 +69,11 @@ function MediaPage() {
         className="d-flex flex-column justify-start"
         style={{ height: "94vh" }}
       >
-        <h1>Media</h1>
-        <h2>
+        <h1>
           <Link href={dataUrl} color="inherit">
-            Data
+            {title}
           </Link>
-        </h2>
+        </h1>
 
         <Link href={`/library/${libraryId}`} color="inherit">
           Related Library
@@ -88,8 +89,8 @@ function MediaPage() {
 
         {attachments.map((value) => (
           <h4>
-            <Link href={`/attachment/${value}`} color="inherit">
-              {value}
+            <Link href={`/attachment/${value.id}`} color="inherit">
+              {value.name}
             </Link>
           </h4>
         ))}

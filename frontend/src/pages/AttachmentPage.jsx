@@ -3,16 +3,14 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Paper } from "@mui/material";
 import Link from "@mui/material/Link";
 import { useParams } from "react-router-dom";
-import { addAttachment, getAttachmentInfo } from "../actions/attachment";
+import { getAttachmentInfo } from "../actions/attachment";
 import Navbar from "../common/NavBar";
 
 function AttachmentPage() {
   const [name, setName] = useState("");
   const [textValue, setTextValue] = useState("");
   const [fileValue, setFileValue] = useState("");
-  const [media, setMedia] = useState("");
-
-  const [open, setOpen] = useState(false);
+  const [mediaId, setMedia] = useState("");
 
   const { id } = useParams();
 
@@ -29,17 +27,6 @@ function AttachmentPage() {
       });
   }, [id]);
 
-  const handleSubmit = () => setOpen(true);
-  const handleAdd = (file) => {
-    addAttachment({})
-      .then((response) => {
-        setOpen(false);
-        window.location.reload();
-      })
-      .catch((e) => {
-        console.log("Error", e);
-      });
-  };
   return (
     <Fragment>
       <Navbar />
@@ -48,23 +35,24 @@ function AttachmentPage() {
         className="d-flex flex-column justify-start"
         style={{ height: "94vh" }}
       >
-        <h1>ATTACHMENT</h1>
-        <h3>{name}</h3>
+        <h1>{name}</h1>
 
         {textValue && (
           <>
-            <div>Value :</div>
-            <div>{textValue}</div>
+            <h2>{textValue}</h2>
           </>
         )}
 
         {fileValue && (
-          <h3>
+          <h2>
             <Link href={fileValue} color="inherit">
               Data
             </Link>
-          </h3>
+          </h2>
         )}
+        <Link href={`/media/${mediaId}`} color="inherit">
+          Related Media
+        </Link>
       </Paper>
     </Fragment>
   );

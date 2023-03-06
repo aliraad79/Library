@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { getLibraryInfo } from "../actions/library";
 import { addMedia } from "../actions/media";
 import Navbar from "../common/NavBar";
-import PopUp from "../common/PopUp";
+import AddMediaPopUp from "../common/PopUp";
 
 function LibraryPage() {
   const [title, setTitle] = useState("");
@@ -32,8 +32,8 @@ function LibraryPage() {
   }, [id]);
 
   const handleSubmit = () => setOpen(true);
-  const handleAdd = (file) => {
-    addMedia({ library: id, data: file })
+  const handleAdd = (file, title) => {
+    addMedia({ library: id, data: file, title })
       .then((response) => {
         setOpen(false);
         window.location.reload();
@@ -46,7 +46,7 @@ function LibraryPage() {
     <Fragment>
       <Navbar />
 
-      <PopUp open={open} setOpen={setOpen} handleAdd={handleAdd} />
+      <AddMediaPopUp open={open} setOpen={setOpen} handleAdd={handleAdd} />
 
       <Paper
         className="d-flex flex-column justify-start"
@@ -55,10 +55,12 @@ function LibraryPage() {
         <h2>{title}</h2>
         <p>{description}</p>
 
-        <p>Accepted types for this Library:</p>
-        {acceptedTypes.map((value) => (
-          <span key={value}>{value}</span>
-        ))}
+        <div className="d-flex flex-column" style={{ color: "#00FF00" }}>
+          <p>Accepted types for this Library:</p>
+          {acceptedTypes.map((value) => (
+            <span key={value}>{value}</span>
+          ))}
+        </div>
 
         <Button onClick={handleSubmit} style={{ marginTop: "20px" }}>
           Add Media
@@ -66,8 +68,8 @@ function LibraryPage() {
         <h1>Medias</h1>
 
         {medias.map((value) => (
-          <Link href={`/media/${value}`} color="inherit">
-            {value}
+          <Link href={`/media/${value.id}`} color="inherit">
+            {value.title}
           </Link>
         ))}
       </Paper>
