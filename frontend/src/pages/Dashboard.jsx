@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { getLibraries } from "../actions/library";
 
-import ItemCard from "../common/ItemCard";
+import LibraryCard from "../common/ItemCard";
 import Navbar from "../common/NavBar";
 
 function Dashboard() {
@@ -36,7 +36,7 @@ function Dashboard() {
       <Grid container spacing={0.5} style={{ margin: "5px", maxWidth: "99%" }}>
         {items.map((i) => (
           <Grid item xs={3}>
-            <ItemCard title={i.title} desc={i.description} id={i.id}></ItemCard>
+            <LibraryCard title={i.title} desc={i.description} id={i.id}></LibraryCard>
           </Grid>
         ))}
       </Grid>

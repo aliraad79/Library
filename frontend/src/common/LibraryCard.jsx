@@ -4,10 +4,10 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 
-function ItemCard({ title, desc, id }) {
+function LibraryCard({ title, desc, id }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea href={`/item/${id}`}>
+      <CardActionArea href={`/library/${id}`}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {title}
@@ -26,4 +26,4 @@ function ItemCard({ title, desc, id }) {
   );
 }
 
-export default ItemCard;
+export default LibraryCard;
