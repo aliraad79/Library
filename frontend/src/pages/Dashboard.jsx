@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { getLibraries } from "../actions/library";
 
-import LibraryCard from "../common/ItemCard";
+import LibraryCard from "../common/LibraryCard";
 import Navbar from "../common/NavBar";
 
 function Dashboard() {
