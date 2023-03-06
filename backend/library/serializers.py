@@ -1,10 +1,24 @@
-from rest_framework.serializers import ModelSerializer, StringRelatedField
+from rest_framework.serializers import ModelSerializer, StringRelatedField, PrimaryKeyRelatedField
 
 from .models import Attachment, Library, Media, MediaType
 
 
+class AttachmentSerializer(ModelSerializer):
+    class Meta:
+        model = Attachment
+        fields = "__all__"
+
+
+class MediaSerializer(ModelSerializer):
+    attachments = AttachmentSerializer(many=True, required=False)
+
+    class Meta:
+        model = Media
+        fields = ["id", "title", "data", "library", "attachments"]
+
+
 class LibrarySerializer(ModelSerializer):
-    # medias = StringRelatedField(many=True)
+    medias = MediaSerializer(many=True, required=False, read_only=True)
 
     class Meta:
         model = Library
@@ -20,18 +34,6 @@ class LibrarySerializer(ModelSerializer):
     def get_validation_exclusions(self):
         exclusions = super(LibrarySerializer, self).get_validation_exclusions()
         return exclusions + ["owner"]
-
-
-class MediaSerializer(ModelSerializer):
-    class Meta:
-        model = Media
-        fields = ["id", "data", "library", "attachments"]
-
-
-class AttachmentSerializer(ModelSerializer):
-    class Meta:
-        model = Attachment
-        fields = "__all__"
 
 
 class MediaTypeSerializer(ModelSerializer):

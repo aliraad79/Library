@@ -12,6 +12,7 @@ class Library(models.Model):
 
 
 class Media(models.Model):
+    title = models.CharField(max_length=512, default="MediaTitle")
     data = models.FileField(upload_to="medias")
     library = models.ForeignKey(
         Library, on_delete=models.CASCADE, related_name="medias"
