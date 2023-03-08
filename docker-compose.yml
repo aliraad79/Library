@@ -6,16 +6,16 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=library
 
   backend:
     build:
       context: "."
       dockerfile: Dockerfile.backend
+    command: ./entrypoint.sh
     environment:
       - DEBUG=False
-    ports:
-      - 8000:8000
+      - PORT=8000
     depends_on:
       - db
   
@@ -23,5 +23,7 @@ services:
     build:
       context: "."
       dockerfile: Dockerfile.frontend
+      args:
+        REACT_APP_HOST_IP_ADDRESS: /api
     ports:
       - 81:80
