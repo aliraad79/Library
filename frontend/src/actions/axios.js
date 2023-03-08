@@ -8,10 +8,12 @@ function getHeaders() {
 }
 
 function createAxiosInstance() {
+  var url = "http://localhost:8000/api";
+  if (process.env.REACT_APP_HOST_IP_ADDRESS) {
+    url = process.env.REACT_APP_HOST_IP_ADDRESS;
+  }
   const instance = axios.create({
-    // baseURL: window.REACT_APP_API_URL || process.env.REACT_APP_API_URL,
-    baseURL: "http://localhost:8000/api",
-    // baseURL: "/api",
+    baseURL: url,
     headers: getHeaders(),
   });
 
