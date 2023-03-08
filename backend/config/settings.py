@@ -86,6 +86,15 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
+    if DEBUG
+    else {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "library",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": "db",
+        "PORT": "5432",
+    }
 }
 
 
@@ -125,9 +134,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-MEDIA_ROOT = 'media/'
+MEDIA_ROOT = "media/"
 
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -139,9 +148,9 @@ AUTH_USER_MODEL = "user.User"
 
 # REST
 REST_FRAMEWORK = {
-   'DEFAULT_AUTHENTICATION_CLASSES': (
-       'rest_framework.authentication.TokenAuthentication',
-   ),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+    ),
 }
 
 
@@ -160,5 +169,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://frontend:81",
-    "http://frontend"
+    "http://frontend",
 ]
