@@ -33,7 +33,7 @@ class Attachment(models.Model):
 
 
 class MediaType(models.Model):
-    name = models.CharField(max_length=32, null=True)
+    name = models.CharField(max_length=32, null=True, unique=True)
 
     def __str__(self) -> str:
         return self.name

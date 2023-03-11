@@ -17,6 +17,6 @@ class Command(BaseCommand):
         with open(file_path, "r") as f:
             types = f.readlines()
             for t in types:
-                MediaType.objects.create(name=t.replace("\n", ""))
+                MediaType.objects.get_or_create(name=t.replace("\n", ""))
 
         self.stdout.write(f"Media types created")
