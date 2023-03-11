@@ -14,8 +14,8 @@ urlpatterns = [
     path("<int:pk>", LibraryInstanceView.as_view()),
     path("attachment", AttachmentView.as_view()),
     path("attachment/<int:pk>", AttachmentView.as_view()),
-    path("media", MediaView.as_view()),
-    path("media/<int:pk>", MediaView.as_view()),
+    path("mymedia", MediaView.as_view()),
+    path("mymedia/<int:pk>", MediaView.as_view()),
     path("mediaTypes", MediaTypeView.as_view()),
 ]
 
