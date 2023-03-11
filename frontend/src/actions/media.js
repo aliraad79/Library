@@ -7,7 +7,7 @@ export const addMedia = ({ library, data, title }) => {
   formData.append("title", title);
   formData.append("data", data);
   
-  return axios().post(`/library/media`, formData, {
+  return axios().post(`/library/mymedia`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -15,5 +15,5 @@ export const addMedia = ({ library, data, title }) => {
 };
 
 export const getMediaInfo = ({ id }) => {
-  return axios().get(`/library/media/${id}`);
+  return axios().get(`/library/mymedia/${id}`);
 };
