@@ -6,3 +6,6 @@ py
 java
 pyc
 sqlite3
+mp4
+odt
+sh
