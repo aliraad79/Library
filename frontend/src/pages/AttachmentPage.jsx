@@ -50,7 +50,7 @@ function AttachmentPage() {
             </Link>
           </h2>
         )}
-        <Link href={`/media/${mediaId}`} color="inherit">
+        <Link href={`/mymedia/${mediaId}`} color="inherit">
           Related Media
         </Link>
       </Paper>

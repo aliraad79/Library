@@ -42,8 +42,8 @@ function App() {
             <Route exact path="/library/:id" element={<LibraryPage />} />
           </Route>
 
-          <Route exact path="/media/:id" element={<PrivateRoute />}>
-            <Route exact path="/media/:id" element={<MediaPage />} />
+          <Route exact path="/mymedia/:id" element={<PrivateRoute />}>
+            <Route exact path="/mymedia/:id" element={<MediaPage />} />
           </Route>
 
           <Route exact path="/attachment/:id" element={<PrivateRoute />}>

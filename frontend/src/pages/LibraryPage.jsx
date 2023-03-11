@@ -68,7 +68,7 @@ function LibraryPage() {
         <h1>Medias</h1>
 
         {medias.map((value) => (
-          <Link href={`/media/${value.id}`} color="inherit">
+          <Link href={`/mymedia/${value.id}`} color="inherit">
             {value.title}
           </Link>
         ))}
