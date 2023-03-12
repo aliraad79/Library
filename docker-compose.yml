@@ -28,7 +28,7 @@ services:
       args:
         REACT_APP_HOST_IP_ADDRESS: /api
     volumes:
-      - media_volume:/home/media
+      - media_volume:/mediafiles
     ports:
       - 80:80
 
