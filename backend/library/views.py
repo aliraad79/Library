@@ -28,9 +28,14 @@ class LibraryInstanceView(generics.RetrieveAPIView, generics.UpdateAPIView):
     queryset = Library.objects.all()
     serializer_class = LibrarySerializer
 
-    def get_queryset(self):
-        user = self.request.user
-        return Library.objects.filter(owner=user)
+    def get(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if request.user.id != None or instance.shared:
+            serializer = self.get_serializer(instance)
+            return Response(serializer.data)
+        else:
+            return Response({"Error": "Not Shared library"}, status=404)
+
 
 
 class AttachmentView(generics.CreateAPIView, generics.RetrieveAPIView):
