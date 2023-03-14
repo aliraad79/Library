@@ -6,8 +6,8 @@ import { Button, Link, Paper } from "@mui/material";
 import { addAttachment } from "../actions/attachment";
 import { getMediaInfo } from "../actions/media";
 
-import AddFieldAttachmentPopUp from "../common/AddFieldAttachmentPopUp";
-import AddFileAttachmentPopUp from "../common/AddFileAttachmentPopUp";
+import AddFieldAttachmentPopUp from "../Popups/AddFieldAttachmentPopUp";
+import AddFileAttachmentPopUp from "../Popups/AddFileAttachmentPopUp";
 
 import Navbar from "../common/NavBar";
 
@@ -75,15 +75,15 @@ function MediaPage() {
           </Link>
         </h1>
 
-        <Link href={`/library/${libraryId}`} color="inherit">
-          Related Library
+        <Link href={`/library/${libraryId}`} color="#00ff00">
+          Library
         </Link>
 
         <Button onClick={handleFileSubmit} style={{ marginTop: "20px" }}>
           Add File Attachemnt
         </Button>
 
-        <Button onClick={handleFieldSubmit} style={{ marginTop: "20px" }}>
+        <Button onClick={handleFieldSubmit} style={{ marginTop: "20px" }} color='secondary'>
           Add field Attachemnt
         </Button>
 

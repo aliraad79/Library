@@ -1,24 +1,39 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
 
-function LibraryCard({ title, desc, id }) {
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Typography
+} from "@mui/material";
+
+function LibraryCard({ library, openSuccessShare }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea href={`/library/${id}`}>
+      <CardActionArea href={`/library/${library.id}`}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {title}
+            {library.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {desc}
+            {library.desc}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() =>
+            openSuccessShare({
+              ...library,
+              sharePath: window.location.origin + "/mymedia/" + library.id,
+              shared: true,
+            })
+          }
+        >
           Share
         </Button>
       </CardActions>
