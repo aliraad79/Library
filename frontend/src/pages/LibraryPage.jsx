@@ -1,18 +1,19 @@
 import React, { Fragment, useEffect, useState } from "react";
 
-import { Button, Paper } from "@mui/material";
-import Link from "@mui/material/Link";
+import { Button, Link, Paper, Snackbar, Alert } from "@mui/material";
+
 import { useParams } from "react-router-dom";
 import { getLibraryInfo } from "../actions/library";
 import { addMedia } from "../actions/media";
+import AddMediaPopUp from "../common/AddMediaPopUp";
 import Navbar from "../common/NavBar";
-import AddMediaPopUp from "../common/PopUp";
 
 function LibraryPage() {
   const [title, setTitle] = useState("");
   const [description, setDesc] = useState("");
   const [acceptedTypes, setAcceptedTypes] = useState([]);
   const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
 
   const [medias, setMedias] = useState([]);
 
@@ -40,11 +41,33 @@ function LibraryPage() {
       })
       .catch((e) => {
         console.log("Error", e);
+        setAlertOpen(true);
       });
   };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setAlertOpen(false);
+  };
+
   return (
     <Fragment>
       <Navbar />
+
+      <div>
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={3000}
+          onClose={handleSnackbarClose}
+        >
+          <Alert severity="error">
+            This Media Type is not accepted in this Library
+          </Alert>
+        </Snackbar>
+      </div>
 
       <AddMediaPopUp open={open} setOpen={setOpen} handleAdd={handleAdd} />
 

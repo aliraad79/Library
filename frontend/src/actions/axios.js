@@ -28,7 +28,7 @@ function createAxiosInstance() {
   instance.interceptors.response.use(
     (response) => response,
     (err) => {
-      if (err || err.response.status === 403 || err.response.status === 401) {
+      if (err.response.status === 403 || err.response.status === 401) {
         localStorage.clear();
         // window.location.reload();
       }
