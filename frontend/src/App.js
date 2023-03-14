@@ -38,9 +38,7 @@ function App() {
             <Route exact path="/new-library" element={<NewLibrary />} />
           </Route>
 
-          <Route exact path="/library/:id" element={<PrivateRoute />}>
-            <Route exact path="/library/:id" element={<LibraryPage />} />
-          </Route>
+          <Route exact path="/library/:id" element={<LibraryPage />} />
 
           <Route exact path="/mymedia/:id" element={<PrivateRoute />}>
             <Route exact path="/mymedia/:id" element={<MediaPage />} />
