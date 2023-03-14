@@ -15,3 +15,7 @@ export const getLibraryInfo = ({ id }) => {
 export const getAllFileTypes = () => {
   return axios().get(`/library/mediaTypes`);
 };
+
+export const setLibraryAsShared = (id, data) => {
+  return axios().patch(`/library/${id}`, data);
+};
