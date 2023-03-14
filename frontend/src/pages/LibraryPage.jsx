@@ -5,7 +5,7 @@ import { Button, Link, Paper, Snackbar, Alert } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { getLibraryInfo } from "../actions/library";
 import { addMedia } from "../actions/media";
-import AddMediaPopUp from "../common/AddMediaPopUp";
+import AddMediaPopUp from "../Popups/AddMediaPopUp";
 import Navbar from "../common/NavBar";
 
 function LibraryPage() {
@@ -14,6 +14,7 @@ function LibraryPage() {
   const [acceptedTypes, setAcceptedTypes] = useState([]);
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
+  const [notShared, setNotShared] = useState(false);
 
   const [medias, setMedias] = useState([]);
 
@@ -28,7 +29,7 @@ function LibraryPage() {
         setMedias(response.data.medias);
       })
       .catch((e) => {
-        console.log("Error", e);
+        setNotShared(true);
       });
   }, [id]);
 
@@ -75,26 +76,39 @@ function LibraryPage() {
         className="d-flex flex-column justify-start"
         style={{ height: "94vh" }}
       >
-        <h2>{title}</h2>
-        <p>{description}</p>
+        {!notShared && (
+          <>
+            <h2>{title}</h2>
+            <p>{description}</p>
 
-        <div className="d-flex flex-column" style={{ color: "#00FF00" }}>
-          <p>Accepted types for this Library:</p>
-          {acceptedTypes.map((value) => (
-            <span key={value}>{value}</span>
-          ))}
-        </div>
+            <div className="d-flex flex-column" style={{ color: "#00FF00" }}>
+              <p>Accepted types for this Library:</p>
+              {acceptedTypes.map((value) => (
+                <span key={value}>{value}</span>
+              ))}
+            </div>
 
-        <Button onClick={handleSubmit} style={{ marginTop: "20px" }}>
-          Add Media
-        </Button>
-        <h1>Medias</h1>
+            <Button onClick={handleSubmit} style={{ marginTop: "20px" }}>
+              Add Media
+            </Button>
+            <h1>Medias</h1>
 
-        {medias.map((value) => (
-          <Link href={`/mymedia/${value.id}`} color="inherit">
-            {value.title}
-          </Link>
-        ))}
+            {medias.map((value) => (
+              <Link
+                href={`/mymedia/${value.id}`}
+                color="inherit"
+                key={value.id}
+              >
+                {value.title}
+              </Link>
+            ))}
+          </>
+        )}
+        {notShared && (
+          <h3 style={{ color: "red" }}>
+            The library id is not correct or library has not been shared
+          </h3>
+        )}
       </Paper>
     </Fragment>
   );
