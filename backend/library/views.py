@@ -1,8 +1,8 @@
 import os
 
 from rest_framework import generics
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Attachment, Library, Media, MediaType
 from .serializers import AttachmentSerializer, LibrarySerializer, MediaSerializer
@@ -24,7 +24,7 @@ class LibraryView(generics.ListCreateAPIView):
         return Library.objects.filter(owner=user)
 
 
-class LibraryInstanceView(generics.RetrieveAPIView):
+class LibraryInstanceView(generics.RetrieveAPIView, generics.UpdateAPIView):
     queryset = Library.objects.all()
     serializer_class = LibrarySerializer
 
