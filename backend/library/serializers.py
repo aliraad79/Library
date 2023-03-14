@@ -25,6 +25,7 @@ class LibrarySerializer(ModelSerializer):
         fields = [
             "id",
             "title",
+            "shared",
             "description",
             "owner",
             "accepted_file_extention",

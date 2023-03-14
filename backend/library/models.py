@@ -10,6 +10,8 @@ class Library(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    shared = models.BooleanField(default=False)
+
 
 class Media(models.Model):
     title = models.CharField(max_length=512, default="MediaTitle")
